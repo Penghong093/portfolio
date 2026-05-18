@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "Hongpn",
+    "Nam PengHong",
     "Full-stack Developer",
     "Laravel Developer",
     "PHP Developer",

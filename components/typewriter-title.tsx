@@ -37,7 +37,7 @@ export function TypewriterTitle() {
   }, [isDeleting, letterCount, wordIndex]);
 
   return (
-    <span className="inline-flex min-w-[8ch] items-center">
+    <span className="inline-flex w-[9.5ch] items-center text-left">
       {words[wordIndex].slice(0, letterCount)}
       <span className="ml-2 h-[0.78em] w-[0.08em] animate-pulse bg-[#171b1d]" aria-hidden="true" />
     </span>

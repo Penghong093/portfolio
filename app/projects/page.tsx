@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Projects } from "@/components/projects";
 import { siteConfig } from "@/data/portfolio";
@@ -16,7 +15,6 @@ export default function ProjectsPage() {
       <main>
         <Projects />
       </main>
-      <Footer />
     </>
   );
 }

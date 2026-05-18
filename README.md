@@ -1,4 +1,4 @@
-# Hongpn Portfolio
+# Nam PengHong Portfolio
 
 Modern personal portfolio website built with Next.js App Router, TypeScript, and Tailwind CSS.
 
