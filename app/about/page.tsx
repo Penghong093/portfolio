@@ -92,8 +92,8 @@ export default function AboutPage() {
         <section className="mx-auto w-full max-w-[1440px] px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12">
           <div className="bg-[#171b1d] px-6 py-10 text-[#f7f7f4] sm:px-10 sm:py-14 lg:px-16">
             <blockquote className="max-w-5xl text-3xl font-black uppercase italic leading-[1.05] tracking-normal sm:text-6xl lg:text-7xl">
-              "A developer builds systems that make{" "}
-              <span className="text-[#00f050]">real work</span> easier to run."
+              &ldquo;A developer builds systems that make{" "}
+              <span className="text-[#00f050]">real work</span> easier to run.&rdquo;
             </blockquote>
           </div>
         </section>
