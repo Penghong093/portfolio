@@ -1,17 +1,70 @@
 "use client";
 
-import { Image as ImageIcon } from "lucide-react";
+import { Image as ImageIcon, LoaderCircle } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { projects } from "@/data/portfolio";
 
+type Project = (typeof projects)[number];
+
+function getProjectRole(project: Project) {
+  return "role" in project ? project.role : null;
+}
+
+function ProjectImage({
+  src,
+  alt,
+  sizes,
+  className,
+  priority = false
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+  className: string;
+  priority?: boolean;
+}) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <>
+      <div
+        className={[
+          "absolute inset-0 flex items-center justify-center bg-[#171b1d] bg-[linear-gradient(135deg,#22282b_25%,transparent_25%),linear-gradient(225deg,#22282b_25%,transparent_25%),linear-gradient(45deg,#22282b_25%,transparent_25%),linear-gradient(315deg,#22282b_25%,#171b1d_25%)] bg-[length:22px_22px] bg-[position:11px_0,11px_0,0_0,0_0] transition-opacity duration-300",
+          isLoaded ? "pointer-events-none opacity-0" : "opacity-100"
+        ].join(" ")}
+        aria-hidden="true"
+      >
+        <div className="flex items-center gap-2 border border-[#00f050] bg-[#171b1d] px-3 py-2 font-mono text-[10px] font-black uppercase text-[#00f050] shadow-[3px_3px_0_#00f050]">
+          <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
+          Loading image
+        </div>
+      </div>
+
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        onLoad={() => setIsLoaded(true)}
+        className={[
+          className,
+          "transition duration-300",
+          isLoaded ? "opacity-100" : "opacity-0"
+        ].join(" ")}
+      />
+    </>
+  );
+}
+
 export function Projects() {
-  const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const orderedProjects = [...projects].reverse();
   const variousClientProjects = {
     title: "Various Client Projects",
-    date: "2017 - 2023",
+    date: "2019 - 2023",
     items: [
       "MLM (Multi-Level Marketing) Web Application",
       "Novel & eBook Platform",
@@ -38,6 +91,8 @@ export function Projects() {
     "Tool Download": "2025 - 2026",
     PhotoBooth: "2025 - 2026",
     "Online Poker Game": "2025 - 2026",
+    "DRSB Logistics — China Operations System": "2025 - 2026",
+    "V21 System": "2025 - 2026",
     "Etinh Order": "2025 - 2026",
     Curator: "2025 - 2026"
   };
@@ -47,7 +102,7 @@ export function Projects() {
       <section className="min-h-[calc(100svh-6rem)] bg-[#f7f7f4] bg-[linear-gradient(#e3e6e1_1px,transparent_1px),linear-gradient(90deg,#e3e6e1_1px,transparent_1px)] bg-[size:28px_28px] text-[#171b1d]">
         <div className="mx-auto w-full max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
           <div className="mb-12 grid gap-6 border-b border-[#171b1d] pb-8 lg:grid-cols-[1fr_0.55fr] lg:items-end">
-            <h1 className="text-[15vw] font-black uppercase leading-[0.88] tracking-normal sm:text-7xl lg:text-8xl">
+            <h1 className="text-5xl font-black uppercase leading-[0.88] tracking-normal sm:text-7xl lg:text-8xl">
               Selected
               <br />
               Work
@@ -164,6 +219,7 @@ export function Projects() {
 
                 const { project } = item;
                 const primaryTech = project.tech.slice(0, 2).join(" / ");
+                const projectRole = getProjectRole(project);
 
                 return (
                   <div
@@ -209,6 +265,19 @@ export function Projects() {
                       <h2 className="text-3xl font-black uppercase leading-none sm:text-4xl">
                         {project.title}
                       </h2>
+
+                      {projectRole ? (
+                        <span
+                          className={[
+                            "mt-4 inline-flex w-fit border px-2 py-1 font-mono text-[10px] font-black uppercase",
+                            isDark
+                              ? "border-[#00f050] bg-[#00f050] text-[#171b1d]"
+                              : "border-[#171b1d] bg-[#171b1d] text-[#00f050]"
+                          ].join(" ")}
+                        >
+                          {projectRole}
+                        </span>
+                      ) : null}
 
                       <p className="mt-5 font-mono text-xs font-black uppercase">
                         {project.features ? project.detail : "Core Project Build"}
@@ -295,6 +364,11 @@ export function Projects() {
                 <span className="mb-5 inline-flex bg-[#171b1d] px-2 py-1 font-mono text-[10px] font-black uppercase text-white">
                   Project Detail
                 </span>
+                {getProjectRole(activeProject) ? (
+                  <span className="mb-5 ml-2 inline-flex border border-[#171b1d] bg-[#00f050] px-2 py-1 font-mono text-[10px] font-black uppercase text-[#171b1d]">
+                    {getProjectRole(activeProject)}
+                  </span>
+                ) : null}
                 <h2
                   id="project-dialog-title"
                   className="text-4xl font-black uppercase leading-none sm:text-5xl"
@@ -362,10 +436,9 @@ export function Projects() {
                     aria-label={`Preview ${activeProject.title} screenshot ${index + 1}`}
                     onClick={() => setPreviewImage(image)}
                   >
-                    <Image
+                    <ProjectImage
                       src={image}
                       alt={`${activeProject.title} screenshot ${index + 1}`}
-                      fill
                       sizes="(min-width: 1024px) 896px, 90vw"
                       className="object-cover"
                     />
@@ -401,12 +474,12 @@ export function Projects() {
             </button>
 
             <div className="relative aspect-[3006/1606] w-full bg-white">
-              <Image
+              <ProjectImage
                 src={previewImage}
                 alt={`${activeProject.title} full screenshot preview`}
-                fill
                 sizes="(min-width: 1280px) 1152px, 94vw"
                 className="object-contain"
+                priority
               />
             </div>
           </div>

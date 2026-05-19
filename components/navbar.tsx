@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navItems, siteConfig } from "@/data/portfolio";
+import { navItems } from "@/data/portfolio";
 
 const drawerLinks = [
-  ...navItems.map((item) => ({ ...item, external: false })),
-  { label: "About", href: siteConfig.socials.github, external: true },
-  { label: "Contact", href: `mailto:${siteConfig.email}`, external: false }
+  ...navItems
+    .filter((item) => item.href !== "/projects")
+    .map((item) => ({ ...item, external: false }))
 ];
+
+function isActivePath(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="border-b border-[#171b1d] bg-[#f4f4f2] text-[#171b1d]">
@@ -36,21 +42,23 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-semibold uppercase lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="focus-ring pb-2 hover:text-green-700"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <a className="focus-ring pb-2 hover:text-green-700" href={siteConfig.socials.github}>
-            About
-          </a>
-          <a className="focus-ring pb-2 hover:text-green-700" href={`mailto:${siteConfig.email}`}>
-            Contact
-          </a>
+          {navItems.map((item) => {
+            const isActive = isActivePath(pathname, item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  "focus-ring pb-2 hover:text-green-700",
+                  isActive ? "text-[#007a25]" : ""
+                ].join(" ")}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <Link
@@ -100,7 +108,11 @@ export function Navbar() {
 
           <nav className="mt-8 flex flex-col gap-5 text-4xl font-black uppercase leading-none">
             {drawerLinks.map((item) => {
-              const className = "focus-ring hover:text-green-700";
+              const isActive = isActivePath(pathname, item.href);
+              const className = [
+                "focus-ring hover:text-green-700",
+                isActive ? "text-[#007a25]" : ""
+              ].join(" ");
 
               return item.external ? (
                 <a
@@ -118,6 +130,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={className}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}

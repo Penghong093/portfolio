@@ -8,7 +8,7 @@ export function Hero() {
       <Navbar />
 
       <div className="mx-auto grid w-full max-w-[1440px] flex-1 content-center items-center justify-items-center gap-12 px-5 py-16 text-center sm:px-8 sm:py-24 lg:grid-cols-[1.65fr_1fr] lg:px-12 lg:py-28 lg:text-left">
-        <h1 className="w-full max-w-4xl text-left text-[15vw] font-black uppercase leading-[0.92] sm:text-[6.5rem] lg:text-[6.75rem] xl:text-[7.5rem]">
+        <h1 className="w-full max-w-4xl text-left text-5xl font-black uppercase leading-[0.92] sm:text-[6.5rem] lg:text-[6.75rem] xl:text-[7.5rem]">
           Full
           <br />
           Stack

@@ -12,7 +12,9 @@ export const siteConfig = {
 
 export const navItems = [
   { label: "Work", href: "/projects" },
-  { label: "Stack", href: "/stack" }
+  { label: "Stack", href: "/stack" },
+  { label: "Experience", href: "/experience" },
+  { label: "About", href: "/about" }
 ];
 
 export const projects = [
@@ -93,7 +95,6 @@ export const projects = [
       "Winner detection when a player has no cards left"
     ],
     images: [
-      "/project/pokergame/1.png",
       "/project/pokergame/2.png",
       "/project/pokergame/3.png",
       "/project/pokergame/4.png"
@@ -120,6 +121,23 @@ export const projects = [
     demo: "https://example.com"
   },
   {
+    title: "V21 System",
+    tech: ["Laravel", "Postgres", "Socket", "Telegram Bot", "PWA", "NextJs"],
+    detail:
+      "System designed for inventory management, sales operations, rewards, warehouse control, delivery integration, customer follow-up, alerts, and more.",
+    images: [
+      "/project/vy21/1.png",
+      "/project/vy21/1.jpg",
+      "/project/vy21/2.jpg",
+      "/project/vy21/3.jpg",
+      "/project/vy21/4.jpg",
+      "/project/vy21/5.jpg",
+      "/project/vy21/6.jpg"
+    ],
+    github: "https://github.com/your-github/v21-system",
+    demo: "https://example.com"
+  },
+  {
     title: "Curator",
     tech: ["Laravel", "NextJs", "MSQL", "Socket", "Telegram Bot"],
     detail:
@@ -132,6 +150,21 @@ export const projects = [
       "/project/curatorcommunity/5.png"
     ],
     github: "https://github.com/your-github/curator",
+    demo: "https://example.com"
+  },
+  {
+    title: "DRSB Logistics — China Operations System",
+    tech: ["REST API", "Vue.js", "Git", "Postgresql"],
+    role: "Project Lead",
+    detail:
+      "Working on logistics and operational systems that support daily workflows between China and Cambodia, ensuring reliable data synchronization, shipment tracking, warehouse operations, and business process automation.",
+    images: [
+      "/project/drsbchina/1.png",
+      "/project/drsbchina/2.png",
+      "/project/drsbchina/3.png",
+      "/project/drsbchina/4.png"
+    ],
+    github: "https://github.com/your-github/drsb-logistics-china-operations-system",
     demo: "https://example.com"
   }
 ];

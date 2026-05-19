@@ -14,6 +14,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8
+    },
+    {
+      url: `${siteConfig.url}/experience`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8
+    },
+    {
+      url: `${siteConfig.url}/stack`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7
+    },
+    {
+      url: `${siteConfig.url}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7
     }
   ];
 }

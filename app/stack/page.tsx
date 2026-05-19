@@ -76,10 +76,10 @@ export default function StackPage() {
       <main className="min-h-[calc(100svh-4rem)] bg-[#f4f4f2] text-[#171b1d]">
         <section className="border-b border-[#171b1d]">
           <div className="mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.45fr_0.75fr] lg:items-end lg:px-12">
-            <h1 className="text-[16vw] font-black uppercase leading-[0.88] tracking-normal sm:text-7xl lg:text-8xl xl:text-9xl">
+            <h1 className="text-5xl font-black uppercase leading-[0.88] tracking-normal sm:text-7xl lg:text-8xl xl:text-9xl">
               Technical
               <br />
-              Core_Stack
+              Core Stack
             </h1>
 
             <p className="max-w-sm border-l-4 border-green-700 pl-5 text-base leading-7 text-slate-700">
